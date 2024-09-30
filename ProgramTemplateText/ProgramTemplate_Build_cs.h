@@ -9,6 +9,11 @@ const char* PROGRAMTEMPLATE_BUILD_CS=R"(
 // Copyright 1998-2018 Epic Games, Inc. All Rights Reserved.
 
 using UnrealBuildTool;
+using EpicGames.Core;
+using System.IO;
+using System.Linq;
+using System;
+using System.Collections.Generic;
 
 public class ProgramTemplate : ModuleRules
 {
@@ -17,13 +22,13 @@ public class ProgramTemplate : ModuleRules
         PublicIncludePaths.AddRange(
             new string[]
             {
-                "Runtime/Launch/Public",
+                Path.Combine(EngineDirectory, "Source/Runtime/Launch/Public"),
                 "Programs/ProgramTemplate/Source/Public",
             });
         PrivateIncludePaths.AddRange(
             new string[]
             {
-                "Runtime/Launch/Private",  // For LaunchEngineLoop.cpp include
+                Path.Combine(EngineDirectory, "Source/Runtime/Launch/Private"),  // For LaunchEngineLoop.cpp include
                 "Programs/ProgramTemplate/Source/Private"
             });
 

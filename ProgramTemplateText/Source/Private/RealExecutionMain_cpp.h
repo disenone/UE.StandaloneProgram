@@ -8,6 +8,12 @@ const char* REALEXECUTIONMAIN_CPP_PATH=R"(\\Source\\Private)";
 
 const char* REALEXECUTIONMAIN_CPP_H=R"(
 #include "RealExecutionMain.h"
+#include <Framework/Docking/TabManager.h>
+#include <Modules/ModuleManager.h>
+#include "Windows/AllowWindowsPlatformTypes.h"
+#include <shellapi.h>
+#include <winternl.h>
+#include <intrin.h>
 
 IMPLEMENT_APPLICATION(ProgramTemplate, "ProgramTemplate");
 

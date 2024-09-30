@@ -9,6 +9,7 @@ const char* PROGRAMTEMPLATE_CPP_H=R"(
 
 #include "ProgramTemplate.h"
 #include "ProgramTemplateLog.h"
+#include <RequiredProgramMainCPPInclude.h>
 
 DEFINE_LOG_CATEGORY(LogProgramTemplate);
 

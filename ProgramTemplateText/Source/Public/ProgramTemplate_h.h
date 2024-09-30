@@ -14,7 +14,8 @@ const char* PROGRAM_TEMPLATE_H=R"(
 #include "ProgramTemplateLog.h"
 
 #include "GenericPlatform/GenericApplication.h"
-#include "RequiredProgramMainCPPInclude.h"
+// #include "RequiredProgramMainCPPInclude.h"
+#include "LaunchEngineLoop.h"
 
 #define LOCTEXT_NAMESPACE "ProgramTemplate"
 )";

@@ -10,7 +10,9 @@ const char* REAL_EXECTION_MAIN_H=R"(
 
 #include "ProgramTemplate.h"
 
-#include "LaunchEngineLoop.h"
+// #include "LaunchEngineLoop.h"
+#include <Launch/Public/LaunchEngineLoop.h>
+
 #include "StandaloneRenderer.h"
 #include "Framework/Application/SlateApplication.h"
 #include "CoreMinimal.h"

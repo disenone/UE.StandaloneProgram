@@ -1,5 +1,5 @@
 #ifndef ALL_PROGRAM_TEMPLATE_FILES_H__
-#define DEFINE ALL_PROGRAM_TEMPLATE_FILES_H__
+#define ALL_PROGRAM_TEMPLATE_FILES_H__
 
 #include "ProgramTemplate_Target_cs.h"
 #include "ProgramTemplate_Build_cs.h"
