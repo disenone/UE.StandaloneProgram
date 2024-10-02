@@ -1,4 +1,6 @@
-This is a Create UE StandaloneApplication tool.
+This is a Tool for Creating UE StandaloneApplication.
+
+It Only work for UE Built With Source Version.
 
 ### Usage
 
