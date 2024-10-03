@@ -1,5 +1,6 @@
 using UnrealBuildTool;
 using System.Collections.Generic;
+using System.IO;
 
 [SupportedPlatforms(UnrealPlatformClass.All)]
 public class {_ProgramName_}Target : TargetRules
@@ -8,6 +9,7 @@ public class {_ProgramName_}Target : TargetRules
     {
         Type = TargetType.Program;
         LinkType = TargetLinkType.Monolithic;
+        DefaultBuildSettings = BuildSettingsVersion.V4;
         IncludeOrderVersion = EngineIncludeOrderVersion.Latest;
 
         Name = "{_ProgramName_}";
@@ -39,5 +41,15 @@ public class {_ProgramName_}Target : TargetRules
 
 		// use unity builds by default
 		bUseUnityBuild = true;
+
+        // PostBuildSteps, auto package the program
+		var ModuleDirectory = Path.GetDirectoryName(__FILE__());
+		var PackageFile = Path.Join(ModuleDirectory, "Package.bat");
+		PostBuildSteps.Add(string.Format("call {0}", PackageFile));
+    }
+
+    static string __FILE__([System.Runtime.CompilerServices.CallerFilePath] string fileName = "")
+    {
+	    return fileName;
     }
 }

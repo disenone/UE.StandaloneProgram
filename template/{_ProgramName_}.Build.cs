@@ -11,7 +11,7 @@ public class {_ProgramName_} : ModuleRules
     private const string ProgramName = "{_ProgramName_}";
 
     private const string PackageWin = @"
-@echo on
+@echo off
 
 setlocal
 
@@ -19,36 +19,100 @@ set PROJECT_NAME={_ProgramName_}
 set ENGINE_PATH={_EnginePath_}
 set CONFIGURATION={_Configuration_}
 set OUTPUT_FILE={_OutputFile_}.exe
+set TAB=	
 
 set PROJECT_PATH=%~dp0
-set UPROJECT_PATH=%PROJECT_PATH%..\\..\\..
+call :NormalizePath %PROJECT_PATH%..\\..\\..
+set UPROJECT_PATH=%RETVAL%
 
 set OUTPUT_PATH=%PROJECT_PATH%Package\\%CONFIGURATION%\\%PROJECT_NAME%
 
-mkdir %OUTPUT_PATH%\\Engine\\Binaries\\Win64
-mkdir %OUTPUT_PATH%\\Engine\\Content\\Internationalization\\icudt53l
-mkdir %OUTPUT_PATH%\\Engine\\Content\\Internationalization\\icudt64l
-mkdir %OUTPUT_PATH%\\Engine\\Content\\Slate
-mkdir %OUTPUT_PATH%\\Engine\\Shaders\\StandaloneRenderer
+powershell -Command ""Write-Host 'Packaging [%PROJECT_NAME%]' -ForegroundColor Red""
 
-copy %UPROJECT_PATH%\\Binaries\\Win64\\%OUTPUT_FILE% %OUTPUT_PATH%\\Engine\\Binaries\\Win64
-copy %UPROJECT_PATH%\\Binaries\\Win64\\tbbmalloc.dll %OUTPUT_PATH%\\Engine\\Binaries\\Win64
-copy %UPROJECT_PATH%\\Binaries\\Win64\\tbb.dll %OUTPUT_PATH%\\Engine\\Binaries\\Win64
+if not exist ""%OUTPUT_PATH%\\Engine\\Binaries\\Win64"" mkdir ""%OUTPUT_PATH%\\Engine\\Binaries\\Win64""
+if not exist ""%OUTPUT_PATH%\\Engine\\Content\\Internationalization\\icudt53l"" mkdir ""%OUTPUT_PATH%\\Engine\\Content\\Internationalization\\icudt53l""
+if not exist ""%OUTPUT_PATH%\\Engine\\Content\\Internationalization\\icudt64l"" mkdir ""%OUTPUT_PATH%\\Engine\\Content\\Internationalization\\icudt64l""
+if not exist ""%OUTPUT_PATH%\\Engine\\Content\\Slate"" mkdir ""%OUTPUT_PATH%\\Engine\\Content\\Slate""
+if not exist ""%OUTPUT_PATH%\\Engine\\Shaders\\StandaloneRenderer"" mkdir ""%OUTPUT_PATH%\\Engine\\Shaders\\StandaloneRenderer""
 
-xcopy /y/i/s/e %ENGINE_PATH%\\Content\\Internationalization\\English\\icudt53l %OUTPUT_PATH%\\Engine\\Content\\Internationalization\\icudt53l
-xcopy /y/i/s/e %ENGINE_PATH%\\Content\\Internationalization\\English\\icudt64l %OUTPUT_PATH%\\Engine\\Content\\Internationalization\\icudt64l
-xcopy /y/i/s/e %ENGINE_PATH%\\Content\\Slate %OUTPUT_PATH%\\Engine\\Content\\Slate
-xcopy /y/i/s/e %ENGINE_PATH%\\Shaders\\StandaloneRenderer %OUTPUT_PATH%\\Engine\\Shaders\\StandaloneRenderer
-copy %PROJECT_PATH%Resources\\icon.ico %OUTPUT_PATH%\\Engine\\Content\\Slate\\Icons
+echo %TAB%copy %UPROJECT_PATH%\\Binaries\\Win64\\%OUTPUT_FILE% -^> %OUTPUT_PATH%\\Engine\\Binaries\\Win64
+copy %UPROJECT_PATH%\\Binaries\\Win64\\%OUTPUT_FILE% %OUTPUT_PATH%\\Engine\\Binaries\\Win64 | set /p result=
+if %ERRORLEVEL% neq 0 (
+    echo %TAB%%result%
+    echo %TAB%failed: %ERRORLEVEL%
+    goto :eof
+)
+
+echo %TAB%copy %UPROJECT_PATH%\\Binaries\\Win64\\tbbmalloc.dll -^> %OUTPUT_PATH%\\Engine\\Binaries\\Win64
+copy %UPROJECT_PATH%\\Binaries\\Win64\\tbbmalloc.dll %OUTPUT_PATH%\\Engine\\Binaries\\Win64 | set /p result=
+if %ERRORLEVEL% neq 0 (
+    echo %TAB%%result%
+    echo %TAB%failed: %ERRORLEVEL%
+    goto :eof
+)
+
+echo %TAB%copy %UPROJECT_PATH%\\Binaries\\Win64\\tbb.dll -^> %OUTPUT_PATH%\\Engine\\Binaries\\Win64
+copy %UPROJECT_PATH%\\Binaries\\Win64\\tbb.dll %OUTPUT_PATH%\\Engine\\Binaries\\Win64 | set /p result=
+if %ERRORLEVEL% neq 0 (
+    echo %TAB%%result%
+    echo %TAB%failed: %ERRORLEVEL%
+    goto :eof
+)
+
+echo %TAB%copy %ENGINE_PATH%\\Content\\Internationalization\\English\\icudt53l -^> %OUTPUT_PATH%\\Engine\\Content\\Internationalization\\icudt53l
+xcopy /y/i/s/e/q %ENGINE_PATH%\\Content\\Internationalization\\English\\icudt53l %OUTPUT_PATH%\\Engine\\Content\\Internationalization\\icudt53l | set /p result=
+if %ERRORLEVEL% neq 0 (
+    echo %TAB%%result%
+    echo %TAB%failed: %ERRORLEVEL%
+    goto :eof
+)
+
+echo %TAB%copy %ENGINE_PATH%\\Content\\Internationalization\\English\\icudt64l -^> %OUTPUT_PATH%\\Engine\\Content\\Internationalization\\icudt64l
+xcopy /y/i/s/e/q %ENGINE_PATH%\\Content\\Internationalization\\English\\icudt64l %OUTPUT_PATH%\\Engine\\Content\\Internationalization\\icudt64l | set /p result=
+if %ERRORLEVEL% neq 0 (
+    echo %TAB%%result%
+    echo %TAB%failed: %ERRORLEVEL%
+    goto :eof
+)
+
+echo %TAB%copy %ENGINE_PATH%\\Content\\Slate -^> %OUTPUT_PATH%\\Engine\\Content\\Slate
+xcopy /y/i/s/e/q %ENGINE_PATH%\\Content\\Slate %OUTPUT_PATH%\\Engine\\Content\\Slate | set /p result=
+if %ERRORLEVEL% neq 0 (
+    echo %TAB%%result%
+    echo %TAB%failed: %ERRORLEVEL%
+    goto :eof
+)
+
+echo %TAB%copy %ENGINE_PATH%\\Shaders\\StandaloneRenderer -^> %OUTPUT_PATH%\\Engine\\Shaders\\StandaloneRenderer
+xcopy /y/i/s/e/q %ENGINE_PATH%\\Shaders\\StandaloneRenderer %OUTPUT_PATH%\\Engine\\Shaders\\StandaloneRenderer | set /p result=
+if %ERRORLEVEL% neq 0 (
+    echo %TAB%%result%
+    echo %TAB%failed: %ERRORLEVEL%
+    goto :eof
+)
+
+echo %TAB%copy %PROJECT_PATH%Resources\\icon.ico -^> %OUTPUT_PATH%\\Engine\\Content\\Slate\\Icons
+copy %PROJECT_PATH%Resources\\icon.ico %OUTPUT_PATH%\\Engine\\Content\\Slate\\Icons | set /p result=
+if %ERRORLEVEL% neq 0 (
+    echo %TAB%%result%
+    echo %TAB%failed: %ERRORLEVEL%
+    goto :eof
+)
 
 echo START /B Engine\\Binaries\\Win64\\%OUTPUT_FILE% > %OUTPUT_PATH%\\%PROJECT_NAME%.bat
+
+powershell -Command ""Write-Host 'Done Packaging [%PROJECT_NAME%], call [%OUTPUT_PATH%\\%PROJECT_NAME%.bat] to run' -ForegroundColor Red""
 
 :eof
 endlocal
 pause
+exit /b %ERRORLEVEL%
+
+:NormalizePath
+  SET RETVAL=%~f1
+  EXIT /B 0
 
 ";
-
 
 	public {_ProgramName_}(ReadOnlyTargetRules Target) : base(Target)
 	{

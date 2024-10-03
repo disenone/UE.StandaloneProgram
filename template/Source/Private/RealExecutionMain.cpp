@@ -31,7 +31,7 @@ int RealExecutionMain(const TCHAR* pCmdLine)
 
 	FSlateApplication::Get().AddWindow(MainWindow.ToSharedRef());
 
-	while (!GIsRequestingExit)
+	while (!IsEngineExitRequested())
 	{
 		FSlateApplication::Get().Tick();
 		FSlateApplication::Get().PumpMessages();
