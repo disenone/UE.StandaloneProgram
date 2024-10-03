@@ -18,4 +18,12 @@ options:
   -output OUTPUT      specific output path
 ```
 
+把生成的目录，放到 ue 项目 (uproject) 下的 Source/Programs/，然后重新生成项目文件 (project files)
+
 put the output folder under some ue project Source/Programs/， and regenerate project files.
+
+### Q & A
+
+如果遇到编译错误 (when run into compile error): `10>VersionResource.inl(5): Error RC1015 : cannot open include file 'Launch/Resources/Windows/resource.h'.`
+
+* 继续编译一次即可，just build project again
