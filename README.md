@@ -17,3 +17,5 @@ options:
   -uproject UPROJECT  .uproject file path, Program will output to uproject_path/Source/Programs
   -output OUTPUT      specific output path
 ```
+
+put the output folder under some ue project Source/Programs/， and regenerate project files.
