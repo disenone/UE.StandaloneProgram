@@ -5,7 +5,7 @@ It Only work for UE Built With Source Version.
 ### Usage
 
 ```shell
-usage: main.py [-h] [-uproject UPROJECT] [-output OUTPUT] name
+usage: python3 main.py [-h] [-uproject UPROJECT] [-output OUTPUT] name
 
 Create Standalone Program In UE5
 
